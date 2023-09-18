@@ -16,6 +16,18 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
       },
+      {
+        // add babel to transpile code for backwards compatibility
+        test: /\.(?:js|mjs|cjs)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [["@babel/preset-env", { targets: "defaults" }]],
+            cacheDirectory: true, //enables caching to save on re-transpiling times.
+          },
+        },
+      },
     ],
   },
 };
